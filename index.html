@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Habitos Diarios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white min-h-screen">
+
+    <header class="bg-[#203B53] text-white p-6 text-center shadow-lg dark:bg-slate-950">
+        <h1 class="text-2xl font-bold">Mis Hábitos Diarios</h1>
+        <p class="text-sm opacity-80 mt-1">Tu puedes ser el autor de tu destino</p>
+        <button id="toggle-tema" class="mt-4 px-4 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs font-semibold transition-all">Modo oscuro 🌕</button>
+    </header>
+
+    <main class="flex flex-col md:flex-row w-full min-h-screen">
+        <aside class="w-full md:w-64 bg-white dark:bg-slate-800 p-8 border-r border-slate-200 dark:border-slate-700">
+            <h3 class="text-[#203B53] dark:text-blue-400 font-bold uppercase text-sm mb-4">Menú</h3>
+            <ul class="space-y-2">
+                <li class="p-3 rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">Vista Semanal</li>
+                <li class="p-3 rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">Estadísticas</li>
+                <li class="p-3 rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">Logros</li>
+                <li class="p-3 rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">Configuración</li>
+            </ul>
+        </aside>
+
+        <section class="flex-1 p-8 w-full">
+            <div class="max-w-2xl mb-8 flex gap-3 bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+                <input type="text" id="nuevo-habito" placeholder="Tarea a realizar" class="flex-grow p-2 outline-none bg-transparent dark:text-white">
+                <button id="btn-agregar" class="px-6 py-2 bg-[#4A90E2] text-white rounded-lg font-semibold hover:bg-[#357ABD] transition-all">Añadir</button>
+            </div>
+            <div id="contenedor-tareas"></div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
