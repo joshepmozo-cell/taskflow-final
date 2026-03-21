@@ -4,10 +4,10 @@
 
 TaskFlow es una aplicación web que he diseñado y desarrollado para gestionar tareas y hábitos diarios. Mi objetivo principal fue crear una herramienta funcional y enfocada en el uso diario, con una interfaz intuitiva y un diseño limpio y elegante.
 
-🌐 **Enlace del proyecto en vivo:** [AQUÍ PONDRÁS TU LINK DE VERCEL]
+**Enlace del proyecto en vivo:** https://taskflow-final-henna.vercel.app/
 
 
-**📖 Ejemplos de Uso**
+**Ejemplos de Uso**
 Para sacar el máximo provecho a la aplicación que he construido, prueba las siguientes interacciones:
 1. ``Crear con categoría:`` Escribe "Correr 5 km", selecciona la etiqueta "Salud 🍎" en el menú desplegable y pulsa "Añadir".
 2. ``Edición rápida:`` Haz doble clic sobre el texto de cualquier tarea pendiente. El texto se convertirá en un input; modifícalo y presiona *Enter* para guardar.
@@ -20,12 +20,12 @@ Para sacar el máximo provecho a la aplicación que he construido, prueba las si
 He desarrollado la interfaz buscando un acabado profesional, cuidando la armonía visual y la experiencia del usuario.
 
 - ``Modo Oscuro:`` Incluí un control dedicado para alternar entre el modo claro y oscuro. La paleta de colores la adapté dinámicamente para garantizar la legibilidad en cualquier entorno.
-- ``Categorías Prácticas:`` En lugar de usar prioridades genéricas (alta/baja), implementé etiquetas adaptadas a la rutina diaria: Trabajo 💼, Salud 🍎, Personal 👤 y Hogar 🏠. Cada categoría cuenta con su propio identificador de color.
+- ``Categorías Prácticas:`` En lugar de usar prioridades genéricas (alta/baja), implementé etiquetas adaptadas a la rutina diaria: Trabajo , Salud , Personal y Hogar . Cada categoría cuenta con su propio identificador de color.
 - ``Panel de Estadísticas:`` Creé un panel lateral que muestra el progreso en tiempo real, detallando las tareas totales, completadas y pendientes para mantener la motivación.
 
 ---
 
-**💻 Tecnologías Utilizadas**
+**Tecnologías Utilizadas**
 - ``Estructura y Estilos:`` HTML5 semántico y *Tailwind CSS* para lograr un diseño completamente responsivo (adaptable a dispositivos móviles y escritorio).
 - ``Lógica:`` JavaScript Moderno (ES6+) para la manipulación del DOM y la interactividad.
 - ``Persistencia de Datos:`` Integré la API de *LocalStorage* para asegurar que las tareas, el orden y las preferencias de tema se conserven al recargar la página.
