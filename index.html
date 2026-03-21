@@ -3,38 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskFlow - Habitos Diarios</title>
+    <title>TaskFlow - Hábitos Diarios</title>
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://cdn.jsdelivr.net; img-src 'self' data:; worker-src 'self' blob:;">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { darkMode: 'class' }</script>
-    <link rel="stylesheet" href="style.css">
+    <script src="tailwind-config.js"></script>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white min-h-screen">
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white min-h-screen transition-colors duration-300">
 
     <header class="bg-[#203B53] text-white p-6 text-center shadow-lg dark:bg-slate-950">
         <h1 class="text-2xl font-bold">Mis Hábitos Diarios</h1>
         <p class="text-sm opacity-80 mt-1">Tu puedes ser el autor de tu destino</p>
-        <button id="toggle-tema" class="mt-4 px-4 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs font-semibold transition-all">Modo oscuro 🌕</button>
+        <button id="toggle-tema" aria-label="Alternar modo oscuro" class="mt-4 px-4 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs font-semibold transition-all focus:ring-2 focus:ring-white">
+            Cambiar Modo 🌓
+        </button>
     </header>
 
     <main class="flex flex-col md:flex-row w-full min-h-screen">
         <aside class="w-full md:w-64 bg-white dark:bg-slate-800 p-8 border-r border-slate-200 dark:border-slate-700">
-            <h3 class="text-[#203B53] dark:text-blue-400 font-bold uppercase text-sm mb-4">Menú</h3>
+            <h3 class="text-[#203B53] dark:text-blue-400 font-bold uppercase text-xs tracking-wider mb-6">Estadísticas</h3>
+            <div class="space-y-4 mb-10">
+                <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-100 dark:border-slate-600">
+                    <p class="text-xs text-slate-500 dark:text-slate-400 uppercase font-bold mb-1">Total</p>
+                    <span id="stats-total" class="text-2xl font-bold">0</span>
+                </div>
+                <div class="p-4 bg-green-50 dark:bg-green-900/20 rounded-xl border border-green-100 dark:border-green-900/30">
+                    <p class="text-xs text-green-600 dark:text-green-400 uppercase font-bold mb-1">Completadas</p>
+                    <span id="stats-completadas" class="text-2xl font-bold text-green-700 dark:text-green-300">0</span>
+                </div>
+                <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-100 dark:border-blue-900/30">
+                    <p class="text-xs text-blue-600 dark:text-blue-400 uppercase font-bold mb-1">Pendientes</p>
+                    <span id="stats-pendientes" class="text-2xl font-bold text-blue-700 dark:text-blue-300">0</span>
+                </div>
+            </div>
+
+            <h3 class="text-[#203B53] dark:text-blue-400 font-bold uppercase text-xs tracking-wider mb-4">Explorar</h3>
             <ul class="space-y-2">
-                <li class="p-3 rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">Vista Semanal</li>
-                <li class="p-3 rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">Estadísticas</li>
-                <li class="p-3 rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">Logros</li>
-                <li class="p-3 rounded-lg text-slate-600 dark:text-slate-300 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">Configuración</li>
+                <li class="text-sm text-slate-400 flex items-center gap-2 cursor-default">🏆 Logros</li>
+                <li class="text-sm text-slate-400 flex items-center gap-2 cursor-default">⚙️ Configuración</li>
             </ul>
         </aside>
 
-        <section class="flex-1 p-8 w-full">
-            <div class="max-w-2xl mb-8 flex gap-3 bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
-                <input type="text" id="nuevo-habito" placeholder="Tarea a realizar" class="flex-grow p-2 outline-none bg-transparent dark:text-white">
-                <button id="btn-agregar" class="px-6 py-2 bg-[#4A90E2] text-white rounded-lg font-semibold hover:bg-[#357ABD] transition-all">Añadir</button>
+        <section class="flex-1 p-8 w-full max-w-4xl mx-auto">
+            <div class="mb-8 space-y-4">
+                
+                <div class="flex gap-3 bg-white dark:bg-slate-800 p-2 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 transition-all focus-within:ring-2 focus-within:ring-blue-400">
+                    <span class="pl-3 self-center text-slate-400">🔍</span>
+                    <input type="search" id="buscar-habito" aria-label="Busca tus tareas" placeholder="Busca tus tareas..." class="flex-grow p-2 outline-none bg-transparent dark:text-white">
+                </div>
+
+                <div class="flex gap-3 bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 transition-all focus-within:ring-2 focus-within:ring-blue-400">
+                    <input type="text" id="nuevo-habito" aria-label="Escribir nueva tarea" placeholder="¿Qué tarea quieres agregar hoy?" class="flex-grow p-2 outline-none bg-transparent dark:text-white">
+                    
+                    <select id="categoria-habito" aria-label="Categoría de la tarea" class="bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 rounded-lg px-2 py-1 outline-none text-sm font-medium border-none cursor-pointer focus:ring-2 focus:ring-blue-400">
+                        <option value="Personal">👤 Personal</option>
+                        <option value="Trabajo">💼 Trabajo</option>
+                        <option value="Salud">🍎 Salud</option>
+                        <option value="Hogar">🏠 Hogar</option>
+                    </select>
+
+                    <button id="btn-agregar" aria-label="Añadir tarea" class="px-6 py-2 bg-[#4A90E2] text-white rounded-lg font-semibold hover:bg-[#357ABD] transition-all active:scale-95">Añadir</button>
+                </div>
+
+                <div class="flex gap-2 justify-center items-center flex-wrap pt-2">
+                    <button id="btn-filtro-todas" aria-label="Ver todas" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-[#203B53] text-white">Todas</button>
+                    <button id="btn-filtro-pendientes" aria-label="Ver pendientes" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600">Pendientes</button>
+                    <button id="btn-filtro-completadas" aria-label="Ver completadas" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600">Completadas</button>
+                    
+                    <button id="btn-completar-todas" aria-label="Completar todas las tareas" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 ml-2">
+                        Completar Todas 
+                    </button>
+
+                    <button id="btn-limpiar" aria-label="Limpiar tareas completadas" class="px-4 py-1.5 rounded-full text-xs font-bold transition-all bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-600 ml-2">
+                        Limpiar ✔️
+                    </button>
+                </div>
             </div>
-            <div id="contenedor-tareas"></div>
+            
+            <div id="contenedor-tareas" class="space-y-4"></div>
         </section>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

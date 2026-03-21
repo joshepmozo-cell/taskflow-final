@@ -1,13 +1,106 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body { height: 100%; }
-
-@keyframes slideIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* 1. Reset y Estructura Base */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
 }
 
-.task-card { animation: slideIn 0.4s ease-out; }
+html, body { 
+    height: 100%; 
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
 
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-.dark ::-webkit-scrollbar-thumb { background: #475569; }
+/* 2. Animaciones */
+@keyframes slideIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* 3. Tarjetas de Tareas (Task Cards) y Drag & Drop */
+.task-card { 
+    animation: slideIn 0.4s ease-out; 
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave */
+    
+    /* DRAG & DROP: Evita que se seleccione texto al arrastrar (vital para móvil) */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    cursor: grab; /* Cambia el cursor para indicar que se puede agarrar */
+}
+
+/* Efecto de elevación al pasar el mouse (Hover) */
+.task-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* DRAG & DROP: Estilo para la tarjeta que se está arrastrando actualmente */
+.task-card.dragging {
+    opacity: 0.3; /* La hace casi transparente */
+    border: 2px dashed #4A90E2; /* Le pone un borde punteado azul */
+    cursor: grabbing; /* Cambia el cursor a una mano cerrada */
+    transform: scale(1.02); /* Se agranda un pelín */
+}
+
+/* DRAG & DROP: Estilo para la tarjeta cuando otra está pasando por encima (efecto drop) */
+.task-card.drag-over {
+    border-top: 4px solid #4A90E2; /* Crea una línea azul arriba para indicar dónde caerá */
+    margin-top: -4px; /* Compensa el borde para que no se mueva el resto */
+    transition: all 0.2s ease;
+}
+
+/* DRAG & DROP: Asegura animaciones suaves en el contenedor al reordenar */
+#contenedor-tareas {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* 4. Personalización de Scrollbar (Barra de desplazamiento) */
+::-webkit-scrollbar { 
+    width: 8px; 
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb { 
+    background: #cbd5e1; 
+    border-radius: 4px; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Scrollbar para Modo Oscuro */
+.dark ::-webkit-scrollbar-thumb { 
+    background: #475569; 
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* 5. Ajustes de Utilidad para Layout */
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    main {
+        flex-direction: row;
+    }
+}
+
+/* Evitar que el texto largo rompa la tarjeta */
+h3 {
+    word-break: break-word;
+}
