@@ -3,7 +3,7 @@
  * Gestiona la comunicación asíncrona con el servidor Node.js.
  */
 
-// Detecta automáticamente si estamos en desarrollo (localhost) o en producción (Vercel)
+// Detecta automáticamente si estamos en local host o en vercel
 const BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:3000/api/v1/tasks'
     : '/api/v1/tasks';
@@ -36,7 +36,7 @@ export const apiClient = {
         // No hacemos res.json() porque DELETE devuelve 204 (vacío)
     },
 
-    // 4. Marcar/Desmarcar como completada (Toggle)
+    // 4. Marcar/Desmarcar como completada 
     toggleTask: async (id) => {
         const res = await fetch(`${BASE_URL}/${id}/toggle`, { 
             method: 'PATCH' 
@@ -45,7 +45,7 @@ export const apiClient = {
         return await res.json();
     },
 
-    // 5. Editar el título de una tarea (Ruta: /id/edit)
+    // 5. Editar el título de una tarea 
     editTask: async (id, title) => {
         const res = await fetch(`${BASE_URL}/${id}/edit`, {
             method: 'PATCH',

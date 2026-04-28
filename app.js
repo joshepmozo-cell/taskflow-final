@@ -67,7 +67,7 @@ async function loadTasks() {
 // --- LÓGICA DE LA APLICACIÓN ---
 function actualizarEstadisticas() {
     const total = listaTareas.length;
-    const completadas = listaTareas.filter(tarea => tarea.completed).length; // Adaptado a backend
+    const completadas = listaTareas.filter(tarea => tarea.completed).length; 
     if (statsTotal) statsTotal.textContent = total;
     if (statsCompletadas) statsCompletadas.textContent = completadas;
     if (statsPendientes) statsPendientes.textContent = total - completadas;
@@ -126,7 +126,7 @@ async function borrarTarea(id) {
 async function limpiarCompletadas() {
     const completadas = listaTareas.filter(t => t.completed);
     for (const tarea of completadas) {
-        await apiClient.deleteTask(tarea.id); // Borramos una por una del servidor
+        await apiClient.deleteTask(tarea.id); 
     }
     await loadTasks();
 }
@@ -135,12 +135,12 @@ async function completarTodas() {
     const pendientes = listaTareas.filter(t => !t.completed);
     if (pendientes.length > 0) lanzarConfeti();
     for (const tarea of pendientes) {
-        await apiClient.toggleTask(tarea.id); // Completamos una por una en el servidor
+        await apiClient.toggleTask(tarea.id); 
     }
     await loadTasks();
 }
 
-// Drag & Drop (Solo visual por ahora, no persiste en BD)
+// Drag & Drop Solo visual 
 function reordenarTareasArray(idOrigen, idDestino) {
     if (filtroActivo !== 'todas' || inputBusqueda.value.trim() !== "") return;
     const indiceOrigen = listaTareas.findIndex(t => t.id === idOrigen);
@@ -234,7 +234,7 @@ function renderizarTareas() {
             elementoArticulo.classList.remove('border-t-4', 'border-blue-500');
             if (idTareaArrastrada && idTareaArrastrada !== tarea.id) {
                 reordenarTareasArray(idTareaArrastrada, tarea.id);
-                renderizarTareas(); // Volvemos a pintar localmente
+                renderizarTareas(); 
             }
         });
 
@@ -261,7 +261,7 @@ function renderizarTareas() {
             const guardarEdicion = async () => {
                 const textoModificado = inputEdicion.value.trim();
                 if (textoModificado && textoModificado !== tarea.title) {
-                    await apiClient.editTask(tarea.id, textoModificado); // Llamada al backend
+                    await apiClient.editTask(tarea.id, textoModificado);
                     await loadTasks();
                 } else { renderizarTareas(); }
             };

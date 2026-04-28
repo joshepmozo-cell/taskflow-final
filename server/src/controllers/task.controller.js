@@ -51,7 +51,7 @@ const taskController = {
     eliminarTarea: (req, res, next) => {
         try {
             taskService.eliminarTarea(req.params.id);
-            res.status(204).send(); // 204: No Content (borrado exitoso sin devolver datos)
+            res.status(204).send(); 
         } catch (e) { 
             next(e); 
         }

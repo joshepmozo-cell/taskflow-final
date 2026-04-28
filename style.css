@@ -45,7 +45,7 @@ html, body {
     opacity: 0.3; /* La hace casi transparente */
     border: 2px dashed #4A90E2; /* Le pone un borde punteado azul */
     cursor: grabbing; /* Cambia el cursor a una mano cerrada */
-    transform: scale(1.02); /* Se agranda un pelín */
+    transform: scale(1.02); /* Se agranda un poco */
 }
 
 /* DRAG & DROP: Estilo para la tarjeta cuando otra está pasando por encima (efecto drop) */
@@ -61,7 +61,7 @@ html, body {
     transition: all 0.3s ease;
 }
 
-/* 4. Personalización de Scrollbar (Barra de desplazamiento) */
+/* 4. Personalización Barra de desplazamiento */
 ::-webkit-scrollbar { 
     width: 8px; 
 }
